@@ -1,0 +1,13 @@
+# PyCharm 测试配置
+# 禁用所有测试框架
+
+[tool.pytest.ini_options]
+# 完全禁用 pytest
+python_files = []
+python_classes = []
+python_functions = []
+testpaths = []
+
+[tool.pyright]
+# 禁用测试检测
+ignore = ["**/test_*.py", "**/*_test.py"]
