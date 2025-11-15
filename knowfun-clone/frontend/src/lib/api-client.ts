@@ -161,6 +161,52 @@ export class APIClient {
     })
   }
 
+  // Posts endpoints
+  async getPosts(params: {
+    page?: number
+    pageSize?: number
+    category?: string
+    sortBy?: string
+    search?: string
+  } = {}) {
+    const { page = 1, pageSize = 12, category, sortBy, search } = params
+    let url = `/api/v1/posts/?page=${page}&page_size=${pageSize}`
+    if (category && category !== 'all') {
+      url += `&category=${category}`
+    }
+    if (sortBy) {
+      url += `&sort_by=${sortBy}`
+    }
+    if (search) {
+      url += `&search=${encodeURIComponent(search)}`
+    }
+    return this.request(url)
+  }
+
+  async likePost(id: number) {
+    return this.request(`/api/v1/posts/${id}/like`, {
+      method: 'POST',
+    })
+  }
+
+  async viewPost(id: number) {
+    return this.request(`/api/v1/posts/${id}/view`, {
+      method: 'POST',
+    })
+  }
+
+  // User endpoints
+  async getUserStats() {
+    return this.request('/api/v1/users/me/stats')
+  }
+
+  async updateUserProfile(data: { username?: string }) {
+    return this.request('/api/v1/users/me', {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    })
+  }
+
   // AI Generation endpoints (SSE streaming)
   async* generateFromDocument(
     documentId: number,

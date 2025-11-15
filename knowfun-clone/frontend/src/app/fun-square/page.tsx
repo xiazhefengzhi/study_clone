@@ -49,12 +49,13 @@ export default function FunSquarePage() {
   const loadPosts = async () => {
     try {
       setLoading(true)
-      const response = await apiClient.request<{
-        posts: Post[]
-        total: number
-        page: number
-        page_size: number
-      }>(`/api/v1/posts/?page=${page}&page_size=12${category !== 'all' ? `&category=${category}` : ''}&sort_by=${sortBy}${searchQuery ? `&search=${searchQuery}` : ''}`)
+      const response = await apiClient.getPosts({
+        page,
+        pageSize: 12,
+        category: category !== 'all' ? category : undefined,
+        sortBy,
+        search: searchQuery || undefined
+      })
 
       setPosts(response.posts)
       setTotal(response.total)
@@ -72,9 +73,7 @@ export default function FunSquarePage() {
 
   const handleLike = async (postId: number) => {
     try {
-      await apiClient.request(`/api/v1/posts/${postId}/like`, {
-        method: 'POST'
-      })
+      await apiClient.likePost(postId)
       // Refresh posts
       loadPosts()
     } catch (error) {
@@ -85,9 +84,7 @@ export default function FunSquarePage() {
   const handleViewPost = async (post: Post) => {
     try {
       // Increment view count
-      await apiClient.request(`/api/v1/posts/${post.id}/view`, {
-        method: 'POST'
-      })
+      await apiClient.viewPost(post.id)
       // Navigate to course detail
       router.push(`/learn/courses/${post.course_id}`)
     } catch (error) {
