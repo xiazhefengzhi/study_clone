@@ -20,9 +20,9 @@ export class APIClient {
     endpoint: string,
     options: RequestInit = {}
   ): Promise<T> {
-    const headers: HeadersInit = {
+    const headers: Record<string, string> = {
       'Content-Type': 'application/json',
-      ...options.headers,
+      ...(options.headers as Record<string, string> || {}),
     }
 
     if (this.token) {
@@ -45,25 +45,25 @@ export class APIClient {
   }
 
   // Auth endpoints
-  async register(email: string, password: string, username: string) {
+  async register(email: string, password: string, username: string): Promise<any> {
     return this.request('/api/v1/auth/register', {
       method: 'POST',
       body: JSON.stringify({ email, password, username }),
     })
   }
 
-  async login(email: string, password: string) {
+  async login(email: string, password: string): Promise<any> {
     return this.request('/api/v1/auth/login', {
       method: 'POST',
       body: JSON.stringify({ email, password }),
     })
   }
 
-  async getCurrentUser() {
+  async getCurrentUser(): Promise<any> {
     return this.request('/api/v1/auth/me')
   }
 
-  async refreshToken(refreshToken: string) {
+  async refreshToken(refreshToken: string): Promise<any> {
     return this.request('/api/v1/auth/refresh', {
       method: 'POST',
       body: JSON.stringify({ refresh_token: refreshToken }),
@@ -71,7 +71,7 @@ export class APIClient {
   }
 
   // Documents endpoints
-  async uploadDocument(file: File, title: string, description?: string) {
+  async uploadDocument(file: File, title: string, description?: string): Promise<any> {
     const formData = new FormData()
     formData.append('file', file)
 
@@ -81,7 +81,7 @@ export class APIClient {
       url.searchParams.append('description', description)
     }
 
-    const headers: HeadersInit = {}
+    const headers: Record<string, string> = {}
     if (this.token) {
       headers['Authorization'] = `Bearer ${this.token}`
     }
@@ -102,15 +102,15 @@ export class APIClient {
     return response.json()
   }
 
-  async getDocuments(page = 1, pageSize = 20) {
+  async getDocuments(page = 1, pageSize = 20): Promise<any> {
     return this.request(`/api/v1/documents/?page=${page}&page_size=${pageSize}`)
   }
 
-  async getDocument(id: number) {
+  async getDocument(id: number): Promise<any> {
     return this.request(`/api/v1/documents/${id}`)
   }
 
-  async deleteDocument(id: number) {
+  async deleteDocument(id: number): Promise<any> {
     return this.request(`/api/v1/documents/${id}`, {
       method: 'DELETE',
     })
@@ -123,14 +123,14 @@ export class APIClient {
     style?: string
     difficulty?: string
     description?: string
-  }) {
+  }): Promise<any> {
     return this.request('/api/v1/courses/', {
       method: 'POST',
       body: JSON.stringify(data),
     })
   }
 
-  async getCourses(page = 1, pageSize = 20, status?: string) {
+  async getCourses(page = 1, pageSize = 20, status?: string): Promise<any> {
     let url = `/api/v1/courses/?page=${page}&page_size=${pageSize}`
     if (status) {
       url += `&status=${status}`
@@ -138,24 +138,24 @@ export class APIClient {
     return this.request(url)
   }
 
-  async getCourse(id: number) {
+  async getCourse(id: number): Promise<any> {
     return this.request(`/api/v1/courses/${id}`)
   }
 
-  async updateCourse(id: number, data: any) {
+  async updateCourse(id: number, data: any): Promise<any> {
     return this.request(`/api/v1/courses/${id}`, {
       method: 'PUT',
       body: JSON.stringify(data),
     })
   }
 
-  async deleteCourse(id: number) {
+  async deleteCourse(id: number): Promise<any> {
     return this.request(`/api/v1/courses/${id}`, {
       method: 'DELETE',
     })
   }
 
-  async likeCourse(id: number) {
+  async likeCourse(id: number): Promise<any> {
     return this.request(`/api/v1/courses/${id}/like`, {
       method: 'POST',
     })
@@ -168,7 +168,12 @@ export class APIClient {
     category?: string
     sortBy?: string
     search?: string
-  } = {}) {
+  } = {}): Promise<{
+    posts: any[]
+    total: number
+    page: number
+    page_size: number
+  }> {
     const { page = 1, pageSize = 12, category, sortBy, search } = params
     let url = `/api/v1/posts/?page=${page}&page_size=${pageSize}`
     if (category && category !== 'all') {
@@ -183,24 +188,24 @@ export class APIClient {
     return this.request(url)
   }
 
-  async likePost(id: number) {
+  async likePost(id: number): Promise<any> {
     return this.request(`/api/v1/posts/${id}/like`, {
       method: 'POST',
     })
   }
 
-  async viewPost(id: number) {
+  async viewPost(id: number): Promise<any> {
     return this.request(`/api/v1/posts/${id}/view`, {
       method: 'POST',
     })
   }
 
   // User endpoints
-  async getUserStats() {
+  async getUserStats(): Promise<any> {
     return this.request('/api/v1/users/me/stats')
   }
 
-  async updateUserProfile(data: { username?: string }) {
+  async updateUserProfile(data: { username?: string }): Promise<any> {
     return this.request('/api/v1/users/me', {
       method: 'PUT',
       body: JSON.stringify(data),
@@ -215,7 +220,7 @@ export class APIClient {
     title: string,
     onToken?: (token: string) => void
   ): AsyncGenerator<string, void, unknown> {
-    const headers: HeadersInit = {
+    const headers: Record<string, string> = {
       'Content-Type': 'application/json',
     }
 
@@ -289,7 +294,7 @@ export class APIClient {
     title: string,
     onToken?: (token: string) => void
   ): AsyncGenerator<string, void, unknown> {
-    const headers: HeadersInit = {
+    const headers: Record<string, string> = {
       'Content-Type': 'application/json',
     }
 
