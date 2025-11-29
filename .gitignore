@@ -40,6 +40,11 @@ htmlcov/
 .env
 .env.local
 .env.*.local
+.env.development
+.env.production
+.env.test
+*.env
+!.env.example
 
 # Node.js
 node_modules/
@@ -84,3 +89,4 @@ yarn-error.log*
 # OS
 .DS_Store
 Thumbs.db
+/xiazhestudy/frontend/.env.production

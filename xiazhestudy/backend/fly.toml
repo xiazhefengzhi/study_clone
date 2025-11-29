@@ -1,0 +1,41 @@
+# Fly.io 配置文件
+# 文档: https://fly.io/docs/reference/configuration/
+
+app = "xiazhestudy-api"
+primary_region = "hkg"  # 香港区域，适合中国用户
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  PORT = "8080"
+  HOST = "0.0.0.0"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = false  # 保持运行，不自动停止
+  auto_start_machines = true
+  min_machines_running = 1    # 至少保持1个实例运行
+  processes = ["app"]
+
+  [http_service.concurrency]
+    type = "requests"
+    hard_limit = 250
+    soft_limit = 200
+
+[[vm]]
+  memory = "512mb"  # 免费层可用
+  cpu_kind = "shared"
+  cpus = 1
+
+# 健康检查
+[checks]
+  [checks.alive]
+    grace_period = "10s"
+    interval = "30s"
+    method = "GET"
+    path = "/health"
+    port = 8080
+    timeout = "5s"
+    type = "http"

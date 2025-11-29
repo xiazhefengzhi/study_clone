@@ -1,0 +1,47 @@
+# Render.com 部署配置
+# 文档: https://render.com/docs/blueprint-spec
+
+services:
+  - type: web
+    name: xiazhestudy-api
+    env: docker
+    dockerfilePath: ./Dockerfile
+    region: singapore  # 新加坡区域
+    plan: free  # 免费计划
+    healthCheckPath: /health
+    envVars:
+      - key: PORT
+        value: 8080
+      # 以下环境变量需要在 Render Dashboard 中设置
+      - key: SECRET_KEY
+        sync: false
+      - key: DATABASE_URL
+        sync: false
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_KEY
+        sync: false
+      - key: SUPABASE_SERVICE_KEY
+        sync: false
+      - key: SUPABASE_JWT_SECRET
+        sync: false
+      - key: SUPABASE_ACCESS_KEY_ID
+        sync: false
+      - key: SUPABASE_SECRET_ACCESS_KEY
+        sync: false
+      - key: SUPABASE_ENDPOINT
+        sync: false
+      - key: SUPABASE_PUBLIC_URL
+        sync: false
+      - key: GCP_PROJECT_ID
+        sync: false
+      - key: GCP_CLIENT_ID
+        sync: false
+      - key: GCP_CLIENT_SECRET
+        sync: false
+      - key: GCP_REFRESH_TOKEN
+        sync: false
+      - key: OPENROUTER_API_KEY
+        sync: false
+      - key: CORS_ORIGINS
+        value: https://xiazhestudy.com,https://www.xiazhestudy.com

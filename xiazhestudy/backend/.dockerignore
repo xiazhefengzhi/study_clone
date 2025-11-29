@@ -1,0 +1,55 @@
+# Git
+.git
+.gitignore
+
+# Python
+__pycache__
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+.mypy_cache/
+.pytest_cache/
+*.egg-info/
+dist/
+build/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+.run/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Testing
+htmlcov/
+.coverage
+.tox/
+coverage.xml
+
+# Documentation (keep for reference but don't deploy)
+*.md
+!README.md
+
+# Misc
+*.log
+*.sqlite
+*.db
+Thumbs.db
+.DS_Store
+
+# Local development files
+check/
+*.sh
+rebuild_db.py
+verify_supabase.py
+check_db_connection.py
