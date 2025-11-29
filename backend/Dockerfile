@@ -40,4 +40,4 @@ RUN mkdir -p static/uploads
 EXPOSE 8080
 
 # Run the application (use shell form to allow environment variable substitution)
-CMD uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8080}
+CMD ["sh", "-c", "uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8080}"]
