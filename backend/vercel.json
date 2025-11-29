@@ -23,6 +23,5 @@
   "env": {
     "APP_NAME": "KnowFun Clone",
     "DEBUG": "False"
-  },
-  "regions": ["hnd1", "sfo1"]
+  }
 }

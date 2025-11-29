@@ -1,0 +1,60 @@
+# FastAPI and Core
+fastapi==0.109.0
+uvicorn[standard]==0.27.0
+pydantic==2.5.3
+pydantic-settings==2.1.0
+python-multipart==0.0.6
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+
+# Database
+# PostgreSQL (for Supabase)
+asyncpg==0.29.0
+sqlalchemy[asyncio]==2.0.25
+alembic==1.13.1
+
+# MongoDB (Alternative)
+motor==3.3.2
+beanie==1.24.0
+pymongo==4.6.1
+
+# Supabase Python Client
+supabase==2.3.0
+postgrest-py==0.13.0
+
+# Redis and Celery (for local development)
+redis==5.0.1
+celery==5.3.6
+
+# Upstash Redis (for production - FREE)
+upstash-redis==0.15.0
+
+# Upstash QStash (for task queue - FREE)
+upstash-qstash==2.1.0
+
+# AWS S3
+boto3==1.34.18
+botocore==1.34.18
+
+# AI/ML
+openai==1.10.0
+anthropic==0.8.1
+google-generativeai==0.8.3
+
+# Utils
+python-dotenv==1.0.0
+httpx==0.26.0
+aiofiles==23.2.1
+pdfplumber==0.11.0
+python-pptx==0.6.23
+python-docx==1.1.0
+
+# Testing
+pytest==7.4.4
+pytest-asyncio==0.23.3
+pytest-cov==4.1.0
+
+# Linting and Formatting
+black==24.1.1
+flake8==7.0.0
+mypy==1.8.0
