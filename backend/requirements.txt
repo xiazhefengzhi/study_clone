@@ -1,17 +1,17 @@
 # FastAPI and Core
 fastapi==0.121.2
 uvicorn[standard]==0.38.0
-pydantic==2.5.3
-pydantic-settings==2.1.0
-python-multipart==0.0.6
+pydantic==2.12.4
+pydantic-settings==2.6.1
+python-multipart==0.0.20
 python-jose[cryptography]==3.3.0
 passlib[bcrypt]==1.7.4
 
 # Database
 # PostgreSQL (for Supabase)
-asyncpg==0.29.0
-sqlalchemy[asyncio]==2.0.25
-alembic==1.13.1
+asyncpg==0.30.0
+sqlalchemy[asyncio]==2.0.42
+alembic==1.17.1
 
 # MongoDB (Alternative)
 motor==3.3.2
@@ -32,19 +32,19 @@ botocore==1.40.1
 # AI/ML
 openai==2.8.1
 anthropic==0.75.0
-google-generativeai==0.8.3
+google-generativeai==0.8.5
 
 # Utils
-python-dotenv==1.0.0
-httpx==0.26.0
-aiofiles==23.2.1
-pdfplumber==0.11.0
+python-dotenv==1.2.1
+httpx==0.28.1
+aiofiles==25.1.0
+pdfplumber==0.11.8
 python-pptx==0.6.23
-python-docx==1.1.0
+python-docx==1.2.0
 
 # Testing
-pytest==7.4.4
-pytest-asyncio==0.23.3
+pytest==8.4.2
+pytest-asyncio==1.2.0
 pytest-cov==4.1.0
 
 # Linting and Formatting
