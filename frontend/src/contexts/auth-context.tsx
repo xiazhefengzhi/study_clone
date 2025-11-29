@@ -16,7 +16,7 @@ interface AuthContextType {
   supabaseUser: SupabaseUser | null
   loading: boolean
   signIn: (email: string, password: string) => Promise<void>
-  signUp: (email: string, password: string, username: string) => Promise<void>
+  signUp: (email: string, password: string, username: string) => Promise<{ requiresEmailVerification: boolean; message: string }>
   signOut: () => Promise<void>
   refreshUser: () => Promise<void>
 }
