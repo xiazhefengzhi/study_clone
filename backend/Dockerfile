@@ -39,5 +39,5 @@ RUN mkdir -p static/uploads
 # Expose port
 EXPOSE 8080
 
-# Run the application
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080"]
+# Run the application (use shell form to allow environment variable substitution)
+CMD uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8080}
