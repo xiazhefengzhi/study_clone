@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import { apiClient } from '@/lib/api-client'
 import { useAuth } from '@/contexts/auth-context'
+import { Course } from '@/types/api'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -19,22 +20,6 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog'
 import { ArrowLeft, Heart, Eye, User, Calendar, Edit, Trash2 } from 'lucide-react'
-
-interface Course {
-  id: number
-  user_id: number
-  title: string
-  description: string
-  content: { generated?: string } | null  // 后端存储为 JSON: {"generated": html}
-  style: string
-  difficulty: string
-  status: string
-  is_public: boolean
-  views_count: number  // 后端字段名
-  likes_count: number  // 后端字段名
-  created_at: string
-  updated_at: string
-}
 
 export default function CourseDetailPage() {
   const params = useParams()

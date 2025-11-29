@@ -45,6 +45,7 @@ export interface Course {
   id: number
   title: string
   description?: string
+  content?: { generated?: string } | null
   style: string
   difficulty: string
   status: 'draft' | 'generating' | 'completed' | 'failed'

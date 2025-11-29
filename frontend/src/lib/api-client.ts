@@ -166,6 +166,23 @@ export class APIClient {
     })
   }
 
+  async getPublicCourses(params: {
+    page?: number
+    page_size?: number
+    sort_by?: string
+    category?: string
+    search?: string
+  } = {}): Promise<any> {
+    const queryParams = new URLSearchParams()
+    if (params.page) queryParams.append('page', params.page.toString())
+    if (params.page_size) queryParams.append('page_size', params.page_size.toString())
+    if (params.sort_by) queryParams.append('sort_by', params.sort_by)
+    if (params.category) queryParams.append('category', params.category)
+    if (params.search) queryParams.append('search', params.search)
+
+    return this.request<any>(`/api/v1/courses/public/list?${queryParams.toString()}`)
+  }
+
   // AI Generation endpoints (SSE streaming)
   private async *processStreamResponse(
     response: Response,

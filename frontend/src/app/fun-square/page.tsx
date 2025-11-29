@@ -116,23 +116,13 @@ export default function SquarePage() {
       setLoading(true);
       setError(null);
 
-      const params = new URLSearchParams({
-        page: "1",
-        page_size: "50",
+      const data = await apiClient.getPublicCourses({
+        page: 1,
+        page_size: 50,
         sort_by: sortBy,
+        category: activeCategory !== "全部" ? activeCategory : undefined,
+        search: searchQuery || undefined,
       });
-
-      if (activeCategory !== "全部") {
-        params.append("category", activeCategory);
-      }
-
-      if (searchQuery) {
-        params.append("search", searchQuery);
-      }
-
-      const data = await apiClient.request<ApiResponse>(
-        `/api/v1/courses/public/list?${params.toString()}`
-      );
 
       setCourses(data.courses || []);
       setTotal(data.total || 0);
