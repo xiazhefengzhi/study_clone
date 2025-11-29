@@ -20,7 +20,6 @@ pymongo==4.6.1
 
 # Supabase Python Client
 supabase==2.3.0
-postgrest-py==0.13.0
 
 # Redis and Celery (for local development)
 redis==5.0.1
