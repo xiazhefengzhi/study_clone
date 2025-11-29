@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import { apiClient } from '@/lib/api-client'
 import { useAuth } from '@/contexts/auth-context'
@@ -31,11 +31,7 @@ export default function CourseDetailPage() {
 
   const courseId = params.id as string
 
-  useEffect(() => {
-    loadCourse()
-  }, [courseId])
-
-  const loadCourse = async () => {
+  const loadCourse = useCallback(async () => {
     try {
       setLoading(true)
       const data = await apiClient.getCourse(parseInt(courseId))
@@ -45,7 +41,11 @@ export default function CourseDetailPage() {
     } finally {
       setLoading(false)
     }
-  }
+  }, [courseId])
+
+  useEffect(() => {
+    loadCourse()
+  }, [loadCourse])
 
   const handleLike = async () => {
     if (!course) return

@@ -8,8 +8,9 @@
 
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react'
 import { User as SupabaseUser } from '@supabase/supabase-js'
-import { supabase, type User } from '@/lib/supabase'
+import { supabase } from '@/lib/supabase'
 import { apiClient } from '@/lib/api-client'
+import { User } from '@/types/api'
 
 interface AuthContextType {
   user: User | null
@@ -102,6 +103,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     )
 
     return () => subscription.unsubscribe()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   // 应用待处理的推荐码

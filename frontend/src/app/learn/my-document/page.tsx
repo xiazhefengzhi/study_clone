@@ -22,17 +22,7 @@ import {
 } from '@/components/ui/dialog'
 import { FileText, Upload, Trash2, Loader2, Search, Eye, Download, ExternalLink } from 'lucide-react'
 import { DocumentPreview } from '@/components/document-preview'
-
-interface Document {
-  id: number
-  title: string
-  description: string | null
-  file_type: string
-  file_size: number
-  file_url: string  // 文件访问链接
-  status: string
-  created_at: string
-}
+import { Document } from '@/types/api'
 
 export default function MyDocumentsPage() {
   const { user, loading: authLoading } = useAuth()
@@ -76,7 +66,7 @@ export default function MyDocumentsPage() {
     try {
       setLoading(true)
       const response = await apiClient.getDocuments(1, 100)
-      setDocuments(response.documents)
+      setDocuments(response.items)
     } catch (err: any) {
       setError(err.message)
     } finally {
@@ -407,7 +397,7 @@ export default function MyDocumentsPage() {
         <DocumentPreview
           open={previewOpen}
           onOpenChange={setPreviewOpen}
-          fileUrl={previewDoc.file_url}
+          fileUrl={previewDoc.file_url || ''}
           fileName={previewDoc.title}
           fileType={previewDoc.file_type}
         />

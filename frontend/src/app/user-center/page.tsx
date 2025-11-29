@@ -167,7 +167,7 @@ export default function UserCenterPage() {
             {/* Avatar */}
             <div className="relative">
               <Avatar className="h-32 w-32 border-4 border-background">
-                <AvatarImage src={user?.avatar_url} />
+                <AvatarImage src={user?.avatar_url || undefined} />
                 <AvatarFallback className="text-4xl bg-gradient-to-br from-blue-500 to-cyan-500 text-white">
                   {user?.username?.charAt(0).toUpperCase() || 'U'}
                 </AvatarFallback>

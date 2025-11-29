@@ -27,6 +27,7 @@ export function DocumentPreview({
 }: DocumentPreviewProps) {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
+  const [textContent, setTextContent] = useState<string>('')
 
   // 获取预览 URL
   const getPreviewUrl = () => {
@@ -57,12 +58,30 @@ export function DocumentPreview({
   const ext = fileType.toLowerCase().replace('.', '')
   const isTextFile = ['txt', 'md', 'json', 'csv'].includes(ext)
 
-  // 检查 URL 是否有效
+  // 检查 URL 是否有效，文本文件加载内容
   useEffect(() => {
     if (open && fileUrl) {
       setLoading(true)
       setError(false)
-      
+      setTextContent('')
+
+      // 文本文件直接获取内容
+      if (isTextFile) {
+        fetch(fileUrl)
+          .then(async (res) => {
+            if (!res.ok) throw new Error(`Status: ${res.status}`)
+            const text = await res.text()
+            setTextContent(text)
+            setLoading(false)
+          })
+          .catch((err) => {
+            console.error("Text file load failed:", err)
+            setError(true)
+            setLoading(false)
+          })
+        return
+      }
+
       // 预检请求
       fetch(fileUrl, { method: 'HEAD' })
         .then(async (res) => {
@@ -83,7 +102,7 @@ export function DocumentPreview({
           setLoading(false);
         });
     }
-  }, [open, fileUrl]);
+  }, [open, fileUrl, isTextFile]);
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>

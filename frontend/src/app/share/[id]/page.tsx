@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useParams } from 'next/navigation'
 import Link from 'next/link'
 import { Card, CardContent } from '@/components/ui/card'
@@ -36,11 +36,7 @@ export default function SharePage() {
 
   const courseId = params.id as string
 
-  useEffect(() => {
-    loadCourse()
-  }, [courseId])
-
-  const loadCourse = async () => {
+  const loadCourse = useCallback(async () => {
     try {
       setLoading(true)
       setError(null)
@@ -67,7 +63,11 @@ export default function SharePage() {
     } finally {
       setLoading(false)
     }
-  }
+  }, [courseId])
+
+  useEffect(() => {
+    loadCourse()
+  }, [loadCourse])
 
   // 导出 HTML
   const handleExportHtml = () => {

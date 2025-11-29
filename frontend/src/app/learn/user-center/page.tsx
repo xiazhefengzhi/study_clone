@@ -57,7 +57,7 @@ export default function UserCenterPage() {
   const loadStats = async () => {
     try {
       setLoading(true)
-      const data = await apiClient.request<UserStats>('/api/v1/users/me/stats')
+      const data = await apiClient.getUserStats()
       setStats(data)
     } catch (error) {
       console.error('Failed to load stats:', error)
@@ -73,10 +73,7 @@ export default function UserCenterPage() {
       return;
     }
     try {
-      await apiClient.request('/api/v1/users/me', {
-        method: 'PUT',
-        body: JSON.stringify({ username })
-      })
+      await apiClient.updateProfile({ username })
       await refreshUser()
       setEditing(false)
       toast.success('用户名更新成功！')

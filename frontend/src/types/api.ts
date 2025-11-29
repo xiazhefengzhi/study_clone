@@ -1,11 +1,12 @@
 export interface User {
   id: number
+  supabase_user_id?: string
   email: string
   username: string
   full_name?: string
-  avatar_url?: string
-  is_active: boolean
-  is_superuser: boolean
+  avatar_url?: string | null
+  is_active?: boolean
+  is_superuser?: boolean
   created_at: string
   updated_at: string
   subscription_tier: string
@@ -31,14 +32,15 @@ export interface RegisterResponse {
 export interface Document {
   id: number
   title: string
-  description?: string
-  file_path: string
+  description?: string | null
+  file_path?: string
+  file_url?: string
   file_type: string
   file_size: number
-  status: 'pending' | 'processing' | 'completed' | 'failed'
+  status: 'pending' | 'processing' | 'completed' | 'failed' | string
   created_at: string
-  updated_at: string
-  user_id: number
+  updated_at?: string
+  user_id?: number
 }
 
 export interface Course {

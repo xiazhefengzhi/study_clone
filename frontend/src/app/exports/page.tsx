@@ -280,7 +280,7 @@ export default function ExportsPage() {
                       <Download className="w-8 h-8 opacity-50" />
                     </div>
                     <p className="text-lg font-medium">暂无导出记录</p>
-                    <p className="text-sm mt-1">在动画预览页面点击"导出 HTML"即可生成导出记录</p>
+                    <p className="text-sm mt-1">在动画预览页面点击&ldquo;导出 HTML&rdquo;即可生成导出记录</p>
                   </div>
                 </CardContent>
               </Card>

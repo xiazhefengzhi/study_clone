@@ -25,9 +25,9 @@ export class APIClient {
     endpoint: string,
     options: RequestInit = {}
   ): Promise<T> {
-    const headers: HeadersInit = {
+    const headers: Record<string, string> = {
       'Content-Type': 'application/json',
-      ...options.headers,
+      ...(options.headers as Record<string, string>),
     }
 
     if (this.token) {
@@ -66,6 +66,17 @@ export class APIClient {
 
   async getCurrentUser(): Promise<User> {
     return this.request<User>('/api/v1/auth/me')
+  }
+
+  async getUserStats(): Promise<any> {
+    return this.request<any>('/api/v1/users/me/stats')
+  }
+
+  async updateProfile(data: { username?: string }): Promise<User> {
+    return this.request<User>('/api/v1/users/me', {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    })
   }
 
   async refreshToken(refreshToken: string): Promise<AuthResponse> {

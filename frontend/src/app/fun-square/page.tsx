@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -111,7 +111,7 @@ export default function SquarePage() {
   const [total, setTotal] = useState(0);
 
   // --- 加载数据 ---
-  const loadCourses = async () => {
+  const loadCourses = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
@@ -132,12 +132,12 @@ export default function SquarePage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [activeCategory, sortBy, searchQuery]);
 
   // --- 监听筛选条件变化 ---
   useEffect(() => {
     loadCourses();
-  }, [activeCategory, sortBy]);
+  }, [loadCourses]);
 
   // --- 搜索防抖 ---
   useEffect(() => {
@@ -147,6 +147,7 @@ export default function SquarePage() {
       }
     }, 500);
     return () => clearTimeout(timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchQuery]);
 
   return (

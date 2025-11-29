@@ -2,7 +2,7 @@
 
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { useAuth } from '@/contexts/auth-context'
@@ -16,7 +16,7 @@ import { CheckCircle2, Mail, Loader2, Gift } from 'lucide-react'
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
 
-export default function SignUpPage() {
+function SignUpContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const { signUp, user, supabaseUser, loading: authLoading } = useAuth()
@@ -325,5 +325,17 @@ export default function SignUpPage() {
         </form>
       </Card>
     </div>
+  )
+}
+
+export default function SignUpPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      </div>
+    }>
+      <SignUpContent />
+    </Suspense>
   )
 }
