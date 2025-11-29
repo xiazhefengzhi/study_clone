@@ -1,91 +1,60 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
 # Python
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
 .Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-MANIFEST
-
-# Virtual Environment
 venv/
-ENV/
 env/
-.venv
-
-# PyCharm
-.idea/
-.run/
-
-# Pytest
+.venv/
+ENV/
+*.egg-info/
+dist/
+build/
+.mypy_cache/
 .pytest_cache/
-.coverage
-htmlcov/
-.tox/
 
 # Environment variables
 .env
 .env.local
 .env.*.local
-.env.development
 .env.production
-.env.test
-*.env
-!.env.example
-
-# Node.js
-node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-lerna-debug.log*
-
-# Next.js
-.next/
-out/
-next-env.d.ts
-
-# Production
-/build
-/dist
-
-# Misc
-.DS_Store
-*.pem
-
-# Debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# Local development
-*.log
-.vercel
-
-# Database
-*.db
-*.sqlite
-*.sqlite3
+**/.env
+**/.env.local
+**/.env.production
 
 # IDE
 .vscode/
+.idea/
 *.swp
 *.swo
-*~
-
-# OS
 .DS_Store
+
+# Build outputs
+.next/
+out/
+dist/
+build/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Testing
+coverage/
+.coverage
+htmlcov/
+.pytest_cache/
+.tox/
+
+# Misc
+*.db
+*.sqlite
 Thumbs.db
+.vercel
