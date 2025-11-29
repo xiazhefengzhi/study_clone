@@ -7,11 +7,6 @@
       "main": true
     }
   },
-  "env": {
-    "NEXT_PUBLIC_APP_URL": "https://your-app.vercel.app",
-    "NEXT_PUBLIC_SUPABASE_URL": "@supabase-url",
-    "NEXT_PUBLIC_SUPABASE_ANON_KEY": "@supabase-anon-key"
-  },
   "headers": [
     {
       "source": "/(.*)",
